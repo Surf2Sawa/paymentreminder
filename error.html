@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Payment Reminder</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    text-align: center;
+    padding: 30px;
+}
+
+.container {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    max-width: 420px;
+    margin: auto;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #d9534f;
+}
+
+.btn {
+    display: block;
+    padding: 12px;
+    margin: 10px 0;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.gcash-btn { background-color: #007dff; }
+.maya-btn { background-color: #00b14f; }
+.messenger-btn { background-color: #0275d8; }
+
+.footer {
+    margin-top: 15px;
+    font-size: 13px;
+    color: gray;
+}
+
+/* Modal Style */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    background: white;
+    margin: 10% auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 350px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.modal-content img {
+    width: 100%;
+    max-width: 250px;
+    margin-top: 10px;
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #333;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>⚠ Payment Reminder</h2>
+    <p>Your internet subscription has expired.</p>
+    <p>Please select your payment method.</p>
+
+    <div class="btn gcash-btn" onclick="openModal('gcash')">Pay via GCash</div>
+    <div class="btn maya-btn" onclick="openModal('maya')">Pay via Maya</div>
+
+    <a href="https://m.me/YOURPAGEUSERNAME" class="btn messenger-btn" target="_blank">
+        Send Receipt to Admin (Messenger)
+    </a>
+
+    <div class="footer">
+        After payment, send your screenshot receipt for activation.
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="qrModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3 id="modalTitle">Scan QR</h3>
+        <img id="qrImage" src="" alt="QR Code">
+    </div>
+</div>
+
+<script>
+function openModal(type) {
+    var modal = document.getElementById("qrModal");
+    var title = document.getElementById("modalTitle");
+    var image = document.getElementById("qrImage");
+
+    if (type === "gcash") {
+        title.innerHTML = "Scan GCash QR";
+        image.src = "gcash-qr.png";
+    } else if (type === "maya") {
+        title.innerHTML = "Scan Maya QR";
+        image.src = "maya-qr.png";
+    }
+
+    modal.style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("qrModal").style.display = "none";
+}
+
+/* Close when clicking outside modal */
+window.onclick = function(event) {
+    var modal = document.getElementById("qrModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>
